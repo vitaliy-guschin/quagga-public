@@ -897,7 +897,11 @@ DEFUN (if_mpls_ip,
     return CMD_SUCCESS;
 
   if (mpls_kernel_enable_interface (ifp) < 0)
+  {
+    vty_out (vty, "Can't enable MPLS on interface %s%s",
+      ifp->name, VTY_NEWLINE);
     return CMD_WARNING;
+  }
 
   zebra_if->mpls_enabled = 1;
   mpls_lib_update ();
@@ -928,6 +932,8 @@ DEFUN (no_if_mpls_ip,
 
   if (mpls_kernel_disable_interface (ifp) < 0)
     {
+      vty_out (vty, "Can't disable MPLS on interface %s%s",
+        ifp->name, VTY_NEWLINE);
       zebra_if->mpls_enabled = 1;
       mpls_lib_update ();
       return CMD_WARNING;
