@@ -1301,6 +1301,9 @@ else
     # FIXME: Check MPLS support
     MPLS_METHOD="mpls_openbsd.o"
     AC_MSG_RESULT(MPLS OpenBSD)
+  elif test "x${enable_mpls}" = "xlinux_4x"; then
+    # FIXME: Check MPLS support
+    MPLS_METHOD="mpls_linux_4x.o"
   else
     AC_MSG_ERROR([--enable-mpls requires one of the following arguments: linux, openbsd or null])
   fi
